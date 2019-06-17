@@ -28,5 +28,6 @@
     "define": {
       "freezeTableName": true
     }
-  }
+  },
+  "token_secret": "ABC123cdc454XyZ_!$%.!!333"
 }

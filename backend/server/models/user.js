@@ -17,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
 };
 */
 
-
 module.exports = (sequelize) => {
     return initUser(sequelize);
 };
@@ -41,7 +40,17 @@ function initUser(sequelize) {
         },
         username: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                len: [3,18],
+                notNull: {
+                    msg: 'Please enter your name'
+                }
+            },
+            unique: {
+                args: true,
+                msg: 'Username already in use!'
+            }
         },
         password: {
             type: Sequelize.STRING,
@@ -69,3 +78,4 @@ function initUser(sequelize) {
         modelName: 'user'
     });
 }
+

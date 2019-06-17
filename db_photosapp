@@ -57,10 +57,10 @@ ALTER TABLE public.user_seq OWNER TO angular;
 
 --
 -- TOC entry 197 (class 1259 OID 16396)
--- Name: user; Type: TABLE; Schema: public; Owner: angular
+-- Name: userController; Type: TABLE; Schema: public; Owner: angular
 --
 
-CREATE TABLE public."user" (
+CREATE TABLE public."userController" (
     id integer DEFAULT nextval('public.user_seq'::regclass) NOT NULL,
     username character varying(200) NOT NULL,
     password character varying(50) NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE public."user" (
 );
 
 
-ALTER TABLE public."user" OWNER TO angular;
+ALTER TABLE public."userController" OWNER TO angular;
 
 --
 -- TOC entry 3187 (class 0 OID 16387)
@@ -86,10 +86,10 @@ COPY public.photos (id, photo, description, author, id_user, "createdAt", "updat
 --
 -- TOC entry 3188 (class 0 OID 16396)
 -- Dependencies: 197
--- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: angular
+-- Data for Name: userController; Type: TABLE DATA; Schema: public; Owner: angular
 --
 
-COPY public."user" (id, username, password, id_role, "isActive", "createdAt", "updatedAt") FROM stdin;
+COPY public."userController" (id, username, password, id_role, "isActive", "createdAt", "updatedAt") FROM stdin;
 1	Lorenzo	mypswd	1	t	2019-06-02	2019-06-02
 2	Pippo	mypswd	1	t	2019-06-02	2019-06-02
 3	Topolino	mypswd	1	t	2019-06-02	2019-06-02
@@ -124,10 +124,10 @@ ALTER TABLE ONLY public.photos
 
 --
 -- TOC entry 3065 (class 2606 OID 16400)
--- Name: user user_pkey; Type: CONSTRAINT; Schema: public; Owner: angular
+-- Name: userController user_pkey; Type: CONSTRAINT; Schema: public; Owner: angular
 --
 
-ALTER TABLE ONLY public."user"
+ALTER TABLE ONLY public."userController"
     ADD CONSTRAINT user_pkey PRIMARY KEY (id);
 
 

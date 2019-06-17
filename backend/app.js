@@ -9,11 +9,14 @@ app.use(bodyParser.json());
 //support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Routes
+/*
+  Routes: il metodo carica tutte le routes che trova nella cartella route e i file
+  che contengono nel filename la parola chiave 'route'
+*/
 require('./server/routes').loadRoutes(app);
 
 app.get('*', (req, res) => {
-   res.status(200).send({msg: 'Hello World!'});
+  res.status(200).send({msg: 'Hello World!'});
 });
 
 module.exports = app;
