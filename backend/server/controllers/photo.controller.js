@@ -73,6 +73,54 @@ const photoUpload = (req, res) => {
   }
 };
 
+const get = (req, res) => {
+  const photoRequested = req.params.photo;
+  const isThumb =  (!(req.params.thumb === undefined || req.params.thumb.toLowerCase() === 'false'));
+  console.log(isThumb, isThumb === true);
+  if(!isThumb) {
+    var pathPhoto = './server/uploads/photos/' + photoRequested;
+  } else {
+    var pathPhoto = './server/uploads/photos/thumbs/' + photoRequested;
+  }
+
+
+  console.log('=>', pathPhoto);
+  fs.exists(pathPhoto, exists => {
+      if (exists) {
+        res.status(200).sendFile(path.resolve(pathPhoto));
+      } else {
+        res.status(404).send({message: 'Foto inesistente sul server'});
+      }
+  });
+};
+
+const getAll = (req, res) => {
+  photo.findAll({
+    where: {
+      isActive: true
+    },
+    order: [
+      ['createdAt', 'ASC']
+    ]
+  }).then( photos => {
+    res.status(200).send({photos});
+  }).catch(err => {
+    res.status(500).send({message: "Ops.. problema nel prelevare le fotografie"})
+  });
+}
+
+const getAllAdmin = (req, res) => {
+  photo.findAll({
+    order: [
+      ['createdAt', 'ASC']
+    ]
+  }).then( photos => {
+    res.status(200).send({photos});
+  }).catch(err => {
+    res.status(500).send({message: "Ops.. problema nel prelevare le fotografie"})
+  });
+}
+
 function deleteFile(filePath, res) {
   fs.unlink(filePath, err => {
     if(err){
@@ -84,5 +132,8 @@ function deleteFile(filePath, res) {
 module.exports = {
   create,
   update,
-  photoUpload
+  photoUpload,
+  get,
+  getAll,
+  getAllAdmin
 };
